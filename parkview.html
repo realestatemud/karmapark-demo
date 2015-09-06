@@ -1,24 +1,7 @@
 <html>
   <h1>Parking Spaces for <b>Sample Building</b></h1>
 
-  <script>
-  var demoSpaces = {"ParkingSpaces":[
-    { "ID":"000001",
-      "Number":"001",
-      "Location":"The Palms - 3rd floor Freelon side",
-      "Status":"Unavailable"
-    }
-  ]};
-
-  function init(){
-    for (i=0; i<demoSpaces.ParkingSpaces.length; i++){
-      
-    }
-  }
-
-  </script>
-
-  <table id="ParkingSpaces">
+  <table id="ParkingSpaces" border="1">
     <th>
      <td>Space Number</td>
      <td>Name</td>
@@ -29,11 +12,58 @@
     <tr>
      <td>Example Space 00X</td>
      <td>Example Space Name</td>
-     <td>Example Space Location - Updaters</td>
+     <td>Example Space Location - Upstairs near the lobby elevator</td>
      <td>Example Owner - Bob</td>
      <td>Borrowed</td>
     </tr>
   </table>
 </html>
+  
+<script>
+  var demoSpaces = {"ParkingSpaces":[
+    { "ID":"000001",
+      "Number":"001",
+      "Location":"The Palms - 3rd floor Freelon side",
+      "Status":"Unavailable"
+    }
+  ]};
+
+  function init(){
+    
+   for (i=0; i<demoSpaces.ParkingSpaces.length; i++){
+      var jsonSpace = demoSpaces.ParkingSpaces[i];
+
+      //alert("Hello everybody! " + i + " handling space " + jsonSpace.ID);
+
+      createRow(jsonSpace.Number,
+                jsonSpace.Number + " Palms", //Name
+                jsonSpace.Location,
+                "", //Owner
+                jsonSpace.Status);
+    }
+ }
+
+  function createRow(number, name, location, owner, status){
+    var newRow = document.getElementById("ParkingSpaces").insertRow(-1);
+    var newCell = newRow.insertCell(0);
+   
+    var cells = [];
+    for (i=0; i<5; i++){
+      cells.push(newRow.insertCell(i));
+    }
+    cells[0].innerHTML = number;
+    cells[1].innerHTML = name;
+    cells[2].innerHTML = location;
+    cells[3].innerHTML = owner;
+    cells[4].innerHTML = status;
+  } 
+
+
+  init(); //populate the table with the pre-defined json spaces...
+
+  window.onload = function() { init(); }
+
+  </script>
+
 
 <!-- todo: insert row  http://www.w3schools.com/jsref/met_table_insertrow.asp -->
